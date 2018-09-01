@@ -2,6 +2,11 @@
 
 _Pseudoloc_ is a small library for quickly pseudolocalizing strings. [Pseudolocalization](http://en.wikipedia.org/wiki/Pseudolocalization) is a method for testing the internationalization aspects of your application by replacing your strings with altered versions that maintains string readability while including the most problematic characteristics including text length and character length. It also makes hard coded strings and improperly concatenated strings easy to spot so that they can be properly localized.
 
+## Difference to Pseudoloc
+
+- This library is idempotent. The function returns same result everytime it is run.
+- Delimiter could be Regex special character. Original library did not support these special characters.
+
 ## Using with Node.js
 
     var pseudoloc = require('pseudoloc');
@@ -26,13 +31,13 @@ _Pseudoloc_ is a small library for quickly pseudolocalizing strings. [Pseudoloca
     pseudoloc.str('A test string with a %token%.')
     // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.!!]
 
-## Using from the commandline
+## Using from the command line
 
-_Pseudoloc_ includes a commandline interface to make it easy to incorporate it into your build process. Currently it supports passing in individual strings (great for trying things out) or passing in a valid `JSON` document that contains a set of keys and strings. Each of the strings in the file will then be pseudolocalized.
+_Pseudoloc_ includes a command line interface to make it easy to incorporate it into your build process. Currently it supports passing in individual strings (great for trying things out) or passing in a valid `JSON` document that contains a set of keys and strings. Each of the strings in the file will then be pseudolocalized.
 
-Note: Nodejs must be installed to use the commandline interface.
+Note: Nodejs must be installed to use the command line interface.
 
-    ./bin/pseudoloc -string 'A test string with a %token%.'
+    ./bin/pseudoloc --string 'A test string with a %token%.'
     // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.!!]
 
 
@@ -43,7 +48,7 @@ Note: Nodejs must be installed to use the commandline interface.
       "string3": "a string with a %couple% of %tokens%"
     }
 
-    ./bin/pseudoloc -readFile example.json -writeFile example-pseudo.json
+    ./bin/pseudoloc --readFile example.json --writeFile example-pseudo.json
 
     // example-pseudo.json
     {
@@ -52,7 +57,7 @@ Note: Nodejs must be installed to use the commandline interface.
       "string3": "[!!ȃ şťřīňğ ŵĩťħ ä %couple% ŏƒ %tokens%!!]"
     }
 
-The commandline tool uses the same options as the library. For additional help and more examples:
+The command line tool uses the same options as the library. For additional help and more examples:
 
     ./bin/pseudoloc --help
 
