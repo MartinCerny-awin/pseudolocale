@@ -98,4 +98,9 @@ describe('pseudoloc.str', function() {
     s1.should.eql('_____________________');
   });
 
+  it('should be idempotent', () => {
+    pseudoloc.str('test string').should.eql('[!!ţēśţ śţŕĩńĝ!!]');
+  })
+  
+
 });
