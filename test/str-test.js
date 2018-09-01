@@ -46,6 +46,13 @@ describe('pseudoloc.str', function() {
     s1.indexOf('~this~').should.not.eql(-1);
   });
 
+  it('should use the RegExp special character as delimiter for escaped string', function() {
+    pseudoloc.option.delimiter = '$';
+    var s1 = pseudoloc.str('test $this$ string');
+
+    s1.indexOf('$this$').should.not.eql(-1);
+  });
+
   it('should use the specified start and end delimiter for escaped string', function() {
     pseudoloc.option.startDelimiter = '{{';
     pseudoloc.option.endDelimiter = '}}';

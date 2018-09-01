@@ -63,6 +63,9 @@ pseudoloc = function() {
     Z: String.fromCharCode(377, 379, 381, 437),
     z: String.fromCharCode(378, 380, 382, 438)
   };
+  pseudoloc.escapeRegExp = function(str) {
+    return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+  };
   pseudoloc.pad = function(str, percent) {
     var lenLeft = Math.floor(str.length * percent / 2), lenRight = lenLeft, pStr = str;
     while (lenLeft-- > 0) {
@@ -74,7 +77,11 @@ pseudoloc = function() {
     return pStr;
   };
   pseudoloc.str = function(str) {
-    var opts = pseudoloc.option, startdelim = opts.startDelimiter || opts.delimiter, enddelim = opts.endDelimiter || opts.delimiter, re = new RegExp(startdelim + "\\s*[\\w\\.\\s*]+\\s*" + enddelim, "g"), m, tokens = [], i = 0, tokenIdx = 0, result = "", c, pc;
+    var opts = pseudoloc.option;
+    var startdelim = pseudoloc.escapeRegExp(opts.startDelimiter || opts.delimiter);
+    var enddelim = pseudoloc.escapeRegExp(opts.endDelimiter || opts.delimiter);
+    var re = new RegExp(startdelim + ".*?" + enddelim, "g");
+    var m, tokens = [], i = 0, tokenIdx = 0, result = "", c, pc;
     while (m = re.exec(str)) {
       tokens.push(m);
     }

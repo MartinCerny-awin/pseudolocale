@@ -10,11 +10,11 @@
 *     http://bunkat.github.com/pseudoloc
 */
 pseudoloc.str = function(str) {
-  var opts = pseudoloc.option,
-      startdelim = opts.startDelimiter || opts.delimiter,
-      enddelim = opts.endDelimiter || opts.delimiter,
-      re = new RegExp(startdelim + '\\s*[\\w\\.\\s*]+\\s*' + enddelim, 'g'),
-      m, tokens = [], i = 0, tokenIdx = 0, result = '', c, pc;
+  var opts = pseudoloc.option
+  var startdelim = pseudoloc.escapeRegExp(opts.startDelimiter || opts.delimiter)
+  var enddelim = pseudoloc.escapeRegExp(opts.endDelimiter || opts.delimiter)
+  var re = new RegExp(startdelim + '.*?' + enddelim, 'g')
+  var m, tokens = [], i = 0, tokenIdx = 0, result = '', c, pc;
 
   while((m = re.exec(str))) {
     tokens.push(m);
