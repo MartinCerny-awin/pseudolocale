@@ -1,10 +1,10 @@
-pseudoloc = function() {
-  var pseudoloc = {
+pseudolocale = function() {
+  var pseudolocale = {
     version: "1.1.0"
   };
-  pseudoloc.option = {};
-  pseudoloc.reset = function() {
-    pseudoloc.option = {
+  pseudolocale.option = {};
+  pseudolocale.reset = function() {
+    pseudolocale.option = {
       prepend: "[!!",
       append: "!!]",
       delimiter: "%",
@@ -14,8 +14,8 @@ pseudoloc = function() {
       override: undefined
     };
   };
-  pseudoloc.reset();
-  pseudoloc.table = {
+  pseudolocale.reset();
+  pseudolocale.table = {
     A: String.fromCharCode(192),
     a: String.fromCharCode(224),
     B: String.fromCharCode(223),
@@ -63,10 +63,10 @@ pseudoloc = function() {
     Z: String.fromCharCode(377),
     z: String.fromCharCode(378)
   };
-  pseudoloc.escapeRegExp = function(str) {
+  pseudolocale.escapeRegExp = function(str) {
     return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
   };
-  pseudoloc.pad = function(str, percent) {
+  pseudolocale.pad = function(str, percent) {
     var lenLeft = Math.floor(str.length * percent / 2), lenRight = lenLeft, pStr = str;
     while (lenLeft-- > 0) {
       pStr = " " + pStr;
@@ -76,10 +76,10 @@ pseudoloc = function() {
     }
     return pStr;
   };
-  pseudoloc.str = function(str) {
-    var opts = pseudoloc.option;
-    var startdelim = pseudoloc.escapeRegExp(opts.startDelimiter || opts.delimiter);
-    var enddelim = pseudoloc.escapeRegExp(opts.endDelimiter || opts.delimiter);
+  pseudolocale.str = function(str) {
+    var opts = pseudolocale.option;
+    var startdelim = pseudolocale.escapeRegExp(opts.startDelimiter || opts.delimiter);
+    var enddelim = pseudolocale.escapeRegExp(opts.endDelimiter || opts.delimiter);
     var re = new RegExp(startdelim + ".*?" + enddelim, "g");
     var m, tokens = [], i = 0, tokenIdx = 0, result = "", c, pc;
     while (m = re.exec(str)) {
@@ -98,7 +98,7 @@ pseudoloc = function() {
         continue;
       }
       c = opts.override !== undefined ? opts.override : str[i];
-      pc = pseudoloc.table[c];
+      pc = pseudolocale.table[c];
       if (pc) {
         var diacriticalIndex = str.length % pc.length;
         c = pc[diacriticalIndex];
@@ -106,7 +106,7 @@ pseudoloc = function() {
       result += c;
       i++;
     }
-    return opts.prepend + pseudoloc.pad(result, opts.extend) + opts.append;
+    return opts.prepend + pseudolocale.pad(result, opts.extend) + opts.append;
   };
-  return pseudoloc;
+  return pseudolocale;
 }();

@@ -1,7 +1,7 @@
-var pseudoloc = require("../index");
+var pseudolocale = require("../index");
 
 console.log(JSON.stringify({
-  "name": "pseudoloc",
-  "version": pseudoloc.version,
-  "main": "./pseudoloc.js"
+  "name": "pseudolocale",
+  "version": pseudolocale.version,
+  "main": "./pseudolocale.js"
 }, null, 2));

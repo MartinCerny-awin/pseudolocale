@@ -1,43 +1,43 @@
-# Pseudoloc v1.1.0 [![Build Status](https://travis-ci.org/bunkat/pseudoloc.png)](https://travis-ci.org/bunkat/pseudoloc)
+# Pseudolocale
 
-_Pseudoloc_ is a small library for quickly pseudolocalizing strings. [Pseudolocalization](http://en.wikipedia.org/wiki/Pseudolocalization) is a method for testing the internationalization aspects of your application by replacing your strings with altered versions that maintains string readability while including the most problematic characteristics including text length and character length. It also makes hard coded strings and improperly concatenated strings easy to spot so that they can be properly localized.
+_Pseudolocale_ is a small library for quickly pseudolocalizing strings. [Pseudolocalization](http://en.wikipedia.org/wiki/Pseudolocalealization) is a method for testing the internationalization aspects of your application by replacing your strings with altered versions that maintains string readability while including the most problematic characteristics including text length and character length. It also makes hard coded strings and improperly concatenated strings easy to spot so that they can be properly localized.
 
 ## Difference to Pseudoloc
 
-- This library is idempotent. The function returns same result everytime it is run.
+- This library is idempotent. The function returns same result every time it is run.
 - Delimiter could be Regex special character. Original library did not support these special characters.
 
 ## Using with Node.js
 
-    var pseudoloc = require('pseudoloc');
+    var pseudolocale = require('pseudolocale');
 
-    pseudoloc.str('A test string with a %token%.')
+    pseudolocale.str('A test string with a %token%.')
     // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.!!]
 
 ## Using in a browser
 
-    <script src="../pseudoloc.js" type="text/javascript"></script>
+    <script src="../pseudolocale.js" type="text/javascript"></script>
     <script type="text/javascript">
 
-      pseudoloc.str('A test string with a %token%.')
+      pseudolocale.str('A test string with a %token%.')
       // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.!!]
 
     </script>
 
 ## Using with webpack/browserify
 
-    var pseudoloc = require('pseudoloc/index-browserify');
+    var pseudolocale = require('pseudolocale/index-browserify');
 
-    pseudoloc.str('A test string with a %token%.')
+    pseudolocale.str('A test string with a %token%.')
     // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.!!]
 
 ## Using from the command line
 
-_Pseudoloc_ includes a command line interface to make it easy to incorporate it into your build process. Currently it supports passing in individual strings (great for trying things out) or passing in a valid `JSON` document that contains a set of keys and strings. Each of the strings in the file will then be pseudolocalized.
+_Pseudolocale_ includes a command line interface to make it easy to incorporate it into your build process. Currently it supports passing in individual strings (great for trying things out) or passing in a valid `JSON` document that contains a set of keys and strings. Each of the strings in the file will then be pseudolocalized.
 
 Note: Nodejs must be installed to use the command line interface.
 
-    ./bin/pseudoloc --string 'A test string with a %token%.'
+    ./bin/pseudolocale --string 'A test string with a %token%.'
     // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.!!]
 
 
@@ -48,7 +48,7 @@ Note: Nodejs must be installed to use the command line interface.
       "string3": "a string with a %couple% of %tokens%"
     }
 
-    ./bin/pseudoloc --readFile example.json --writeFile example-pseudo.json
+    ./bin/pseudolocale --readFile example.json --writeFile example-pseudo.json
 
     // example-pseudo.json
     {
@@ -59,7 +59,7 @@ Note: Nodejs must be installed to use the command line interface.
 
 The command line tool uses the same options as the library. For additional help and more examples:
 
-    ./bin/pseudoloc --help
+    ./bin/pseudolocale --help
 
 ## Options
 
@@ -69,8 +69,8 @@ Specifies the string that should be prepended to the beginning of pseudolocalize
 
 Default is `[!!`.
 
-    pseudoloc.option.prepend = '[##';
-    pseudoloc.str('A test string with a %token%.')
+    pseudolocale.option.prepend = '[##';
+    pseudolocale.str('A test string with a %token%.')
     // [##Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.!!]
 
 #### Append
@@ -79,8 +79,8 @@ Specifies the string that should be appended to the end of pseudolocalized strin
 
 Default is `!!]`.
 
-    pseudoloc.option.append = '##]';
-    pseudoloc.str('A test string with a %token%.')
+    pseudolocale.option.append = '##]';
+    pseudolocale.str('A test string with a %token%.')
     // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.##]
 
 #### Delimiter, StartDelimiter, EndDelimiter
@@ -89,13 +89,13 @@ Specifies the token delimiter. Any characters between token delimiters will not 
 
 Default is `%`.
 
-    pseudoloc.option.delimiter = '$$';
-    pseudoloc.str('A test string with a $$token$$.')
+    pseudolocale.option.delimiter = '$$';
+    pseudolocale.str('A test string with a $$token$$.')
     // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą $$token$$.!!]
 
-    pseudoloc.option.startDelimiter = '{{';
-    pseudoloc.option.endDelimiter = '}}';
-    pseudoloc.str('A test string with a {{token}}.')
+    pseudolocale.option.startDelimiter = '{{';
+    pseudolocale.option.endDelimiter = '}}';
+    pseudolocale.str('A test string with a {{token}}.')
     // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą {{token}}.!!]
 
 #### Extend
@@ -104,40 +104,40 @@ Extends the width of the string by the specified percentage. Useful if you will 
 
 Default is `0`.
 
-    pseudoloc.option.extend = 0.3; //30%
-    pseudoloc.str('A test string with a %token%.')
+    pseudolocale.option.extend = 0.3; //30%
+    pseudolocale.str('A test string with a %token%.')
     // [!!Ȃ ťēšť ŝťŕĩŉğ ŵĩťħ â %token%.        !!]
 
 
 #### Override
 
-Specifies an override character that all characters in the string will be replaced with. Used to easily spot unlocalized strings. Set to `undefined` to go back to regular pseudolocalization.
+Specifies an override character that all characters in the string will be replaced with. Used to easily spot unlocalized strings. Set to `undefined` to go back to regular pseudolocalealization.
 
 Default is `undefined`.
 
-    pseudoloc.option.override = '_';
-    pseudoloc.str('A test string with a %token%.')
+    pseudolocale.option.override = '_';
+    pseudolocale.str('A test string with a %token%.')
     // [!!_____________________%token%_!!]
 
 ## Installation
 Using npm:
 
-    $ npm install pseudoloc
+    $ npm install pseudolocale
 
 ## Building
 
-To build the minified javascript files for _pseudoloc_, run `npm install` to install dependencies and then:
+To build the minified javascript files for _pseudolocale_, run `npm install` to install dependencies and then:
 
     $ make build
 
 ## Running tests
 
-To run the tests for _pseudoloc_, run `npm install` to install dependencies and then:
+To run the tests for _pseudolocale_, run `npm install` to install dependencies and then:
 
     $ make test
 
 ## Running benchmarks
 
-To run the benchmarks for _pseudoloc_, run `npm install` to install dependencies and then:
+To run the benchmarks for _pseudolocale_, run `npm install` to install dependencies and then:
 
     $ make benchmark

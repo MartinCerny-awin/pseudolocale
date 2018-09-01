@@ -1,19 +1,19 @@
 var Benchmark = require('benchmark'),
-    pseudoloc = require('../index'),
+    pseudolocale = require('../index'),
     suite = new Benchmark.Suite('next');
 
 suite
 .add('short', function() {
-  pseudoloc.str('test string');
+  pseudolocale.str('test string');
 })
 .add('long', function() {
-  pseudoloc.str('the quick brown fox jumped over the lazy dogs the quick brown fox jumped over the lazy dogs');
+  pseudolocale.str('the quick brown fox jumped over the lazy dogs the quick brown fox jumped over the lazy dogs');
 })
 .add('short with tokens', function() {
-  pseudoloc.str('test %token% string');
+  pseudolocale.str('test %token% string');
 })
 .add('long with tokens', function() {
-  pseudoloc.str('the quick %token% brown fox %token% jumped %token% over the %token% lazy dogs the %token% quick brown fox jumped over %token% the lazy %token% dogs');
+  pseudolocale.str('the quick %token% brown fox %token% jumped %token% over the %token% lazy dogs the %token% quick brown fox jumped over %token% the lazy %token% dogs');
 
 })
 .on('cycle', function(event) {

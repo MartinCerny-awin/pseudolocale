@@ -1,9 +1,9 @@
 /**
-* pseudoloc.js
+* pseudolocale.js
 * (c) 2013 Bill, BunKat LLC.
-* Pseudoloc is freely distributable under the MIT license.
+* Pseudolocale is freely distributable under the MIT license.
 * For all details and documentation:
-*     http://bunkat.github.com/pseudoloc
+*     http://bunkat.github.com/pseudolocale
 */
-pseudoloc = (function() {
-  var pseudoloc = {version: "1.1.0"}; // semver
+pseudolocale = (function() {
+  var pseudolocale = {version: "1.1.0"}; // semver

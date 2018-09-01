@@ -1,21 +1,21 @@
-var pseudoloc = require("../index");
+var pseudolocale = require("../index");
 
 console.log(JSON.stringify({
-  "name": "pseudoloc",
-  "version": pseudoloc.version,
-  "description": "Simple pseudoloc (psuedolocalization) for strings",
+  "name": "pseudolocale",
+  "version": pseudolocale.version,
+  "description": "Simple pseudolocale (psuedolocalization) for strings",
   "keywords": ["localization", "psuedoloc"],
   "author": "BunKat <bill@bunkat.com>",
   "repository" : {
     "type" : "git",
-    "url" : "git://github.com/bunkat/pseudoloc.git"
+    "url" : "git://github.com/bunkat/pseudolocale.git"
   },
   "main": "index.js",
   "browserify": "index-browserify.js",
   "jam": {
     "main": "psuedoloc.js",
     "shim": {
-      "exports": "pseudoloc"
+      "exports": "pseudolocale"
     }
   },
   "dependencies": {

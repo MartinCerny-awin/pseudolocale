@@ -1,5 +1,5 @@
-var pseudoloc = require('../index'), // require('pseudoloc') if installed with npm
-    str = 'Thank you for using %pseudoloc.js%.';
+var pseudolocale = require('../index'), // require('pseudolocale') if installed with npm
+    str = 'Thank you for using %pseudolocale.js%.';
 
 console.log('Before: ', str);
-console.log('After : ', pseudoloc.str(str));
+console.log('After : ', pseudolocale.str(str));

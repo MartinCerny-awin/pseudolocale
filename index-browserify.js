@@ -1,2 +1,2 @@
-require("./pseudoloc");
-module.exports = pseudoloc;
+require("./pseudolocale");
+module.exports = pseudolocale;

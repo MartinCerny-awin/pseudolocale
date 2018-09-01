@@ -1,22 +1,22 @@
 {
-  "name": "pseudoloc",
+  "name": "pseudolocale",
   "version": "1.1.0",
-  "description": "Simple pseudoloc (psuedolocalization) for strings",
+  "description": "Simple pseudolocale (psuedolocalization) for strings",
   "keywords": [
     "localization",
-    "psuedoloc"
+    "pseudolocale"
   ],
-  "author": "BunKat <bill@bunkat.com>",
+  "author": "BunKat <bill@bunkat.com>, Martin Cerny <cerny.mrtn@gmail.com",
   "repository": {
     "type": "git",
-    "url": "git://github.com/bunkat/pseudoloc.git"
+    "url": "https://github.com/MartinCerny-awin/pseudolocale"
   },
   "main": "index.js",
   "browserify": "index-browserify.js",
   "jam": {
     "main": "psuedoloc.js",
     "shim": {
-      "exports": "pseudoloc"
+      "exports": "pseudolocale"
     }
   },
   "dependencies": {

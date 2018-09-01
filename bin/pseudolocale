@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 var program = require('commander'),
-  pseudoloc = require('../index'),
+  pseudolocale = require('..'),
   fs = require('fs'),
   path = require('path');
 
 program
-  .version(pseudoloc.version)
+  .version(pseudolocale.version)
   .option('-d, --delimiter <val>', "sets the token delimiter (default: '%')")
   .option('-S, --startDelimiter <val>', "sets the start token delimiter (default: delimiter)")
   .option('-E, --endDelimiter <val>', "sets the end token delimiter (default: delimiter)")
@@ -14,39 +14,39 @@ program
   .option('-a, --append <val>', "sets the string end tag (default: '!!]')")
   .option('-e, --extend <amount>', "sets the padding percentage (default: '0')", parseFloat)
   .option('-o, --override <char>', "replaces all characters with specified character")
-  .option('-s, --string <str>', "string to pseudolocalize")
-  .option('-r, --readFile <path>', "path to file to pseudolocalize")
+  .option('-s, --string <str>', "string to pseudolocalealize")
+  .option('-r, --readFile <path>', "path to file to pseudolocalealize")
   .option('-w, --writeFile <path>', "path of file to write results to");
 
 program.on('--help', function () {
   console.log('  Examples:');
   console.log('');
 
-  pseudoloc.option = { prepend: '[@@', append: '@@]' };
+  pseudolocale.option = { prepend: '[@@', append: '@@]' };
   console.log('  Custom start and end tags');
-  console.log("    $ pseudoloc -p '[@@' -a '@@]' -s 'test'");
-  console.log("    > " + pseudoloc.str('test'));
+  console.log("    $ pseudolocale -p '[@@' -a '@@]' -s 'test'");
+  console.log("    > " + pseudolocale.str('test'));
   console.log('');
 
-  pseudoloc.reset();
-  pseudoloc.option.override = '_';
-  pseudoloc.option.prepend = '';
-  pseudoloc.option.append = '';
+  pseudolocale.reset();
+  pseudolocale.option.override = '_';
+  pseudolocale.option.prepend = '';
+  pseudolocale.option.append = '';
   console.log('  Replace strings with underscore to spot unlocalized strings');
-  console.log("    $ pseudoloc -p '' -a '' -o '_' -s 'test'");
-  console.log("    > " + pseudoloc.str('test'));
+  console.log("    $ pseudolocale -p '' -a '' -o '_' -s 'test'");
+  console.log("    > " + pseudolocale.str('test'));
   console.log('');
 
-  pseudoloc.reset();
-  pseudoloc.option.extend = 0.3;
+  pseudolocale.reset();
+  pseudolocale.option.extend = 0.3;
   console.log('  Extend strings to ensure space for localization');
-  console.log("    $ pseudoloc -e 0.3 -s 'test string'");
-  console.log("    > " + pseudoloc.str('test string'));
+  console.log("    $ pseudolocale -e 0.3 -s 'test string'");
+  console.log("    > " + pseudolocale.str('test string'));
   console.log('');
 
-  pseudoloc.reset();
-  console.log('  Pseudolocalize all strings in a JSON file');
-  console.log("    $ pseudoloc -r example.json -w example-pseudo.json");
+  pseudolocale.reset();
+  console.log('  Pseudolocalealize all strings in a JSON file');
+  console.log("    $ pseudolocale -r example.json -w example-pseudo.json");
   console.log('');
 });
 
@@ -57,28 +57,28 @@ if (!program.string && !program.readFile) {
   program.help();
 }
 
-pseudoloc.reset();
+pseudolocale.reset();
 var opts = {
-  delimiter: program.delimiter || pseudoloc.option.delimiter,
+  delimiter: program.delimiter || pseudolocale.option.delimiter,
   startDelimiter: program.startDelimiter,
   endDelimiter: program.endDelimiter,
-  prepend: program.prepend || pseudoloc.option.prepend,
-  append: program.append || pseudoloc.option.append,
-  extend: program.extend || pseudoloc.option.extend,
-  override: program.override || pseudoloc.option.override
+  prepend: program.prepend || pseudolocale.option.prepend,
+  append: program.append || pseudolocale.option.append,
+  extend: program.extend || pseudolocale.option.extend,
+  override: program.override || pseudolocale.option.override
 };
 
-pseudoloc.option = opts;
+pseudolocale.option = opts;
 
 if (program.string) {
-  console.log(pseudoloc.str(program.string));
+  console.log(pseudolocale.str(program.string));
 }
 else {
   fs.readFile(program.readFile, { encoding: 'utf8' }, function (err, data) {
     var process = function (_r) {
       for (var id in _r) {
         if (typeof _r[id] === 'string') {
-          _r[id] = pseudoloc.str(_r[id]);
+          _r[id] = pseudolocale.str(_r[id]);
         } else if (typeof _r[id] === 'object') {
           process(_r[id]);
         }

@@ -2,17 +2,17 @@
 * Str.js
 *
 * Replaces all characters in str with pseudolocalized version according to
-* pseudoloc.options.
+* pseudolocale.options.
 *
 * (c) 2013 Bill, BunKat LLC.
-* Pseudoloc is freely distributable under the MIT license.
+* Pseudolocale is freely distributable under the MIT license.
 * For all details and documentation:
-*     http://bunkat.github.com/pseudoloc
+*     http://bunkat.github.com/pseudolocale
 */
-pseudoloc.str = function(str) {
-  var opts = pseudoloc.option
-  var startdelim = pseudoloc.escapeRegExp(opts.startDelimiter || opts.delimiter)
-  var enddelim = pseudoloc.escapeRegExp(opts.endDelimiter || opts.delimiter)
+pseudolocale.str = function(str) {
+  var opts = pseudolocale.option
+  var startdelim = pseudolocale.escapeRegExp(opts.startDelimiter || opts.delimiter)
+  var enddelim = pseudolocale.escapeRegExp(opts.endDelimiter || opts.delimiter)
   var re = new RegExp(startdelim + '.*?' + enddelim, 'g')
   var m, tokens = [], i = 0, tokenIdx = 0, result = '', c, pc;
 
@@ -31,7 +31,7 @@ pseudoloc.str = function(str) {
     }
 
     c = opts.override !== undefined ? opts.override : str[i];
-    pc = pseudoloc.table[c];
+    pc = pseudolocale.table[c];
     if (pc) {
       var diacriticalIndex = str.length % pc.length;
       c = pc[diacriticalIndex];
@@ -40,5 +40,5 @@ pseudoloc.str = function(str) {
     i++;
   }
 
-  return opts.prepend + pseudoloc.pad(result, opts.extend) + opts.append;
+  return opts.prepend + pseudolocale.pad(result, opts.extend) + opts.append;
 };

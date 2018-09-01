@@ -4,11 +4,11 @@
 * Pads a string with additional characters.
 *
 * (c) 2013 Bill, BunKat LLC.
-* Pseudoloc is freely distributable under the MIT license.
+* Pseudolocale is freely distributable under the MIT license.
 * For all details and documentation:
-*     http://bunkat.github.com/pseudoloc
+*     http://bunkat.github.com/pseudolocale
 */
-pseudoloc.pad = function (str, percent) {
+pseudolocale.pad = function (str, percent) {
 
   var lenLeft = Math.floor((str.length * percent) / 2),
     lenRight = lenLeft,

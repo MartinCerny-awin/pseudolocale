@@ -1,17 +1,17 @@
 /**
 * Option.js
 *
-* Pseudolocalization options.
+* Pseudolocalealization options.
 *
 * (c) 2013 Bill, BunKat LLC.
-* Pseudoloc is freely distributable under the MIT license.
+* Pseudolocale is freely distributable under the MIT license.
 * For all details and documentation:
-*     http://bunkat.github.com/pseudoloc
+*     http://bunkat.github.com/pseudolocale
 */
-pseudoloc.option = {};
+pseudolocale.option = {};
 
-pseudoloc.reset = function() {
-  pseudoloc.option = {
+pseudolocale.reset = function() {
+  pseudolocale.option = {
     prepend: '[!!',
     append: '!!]',
     delimiter: '%',
@@ -22,4 +22,4 @@ pseudoloc.reset = function() {
   };
 };
 
-pseudoloc.reset();
+pseudolocale.reset();
