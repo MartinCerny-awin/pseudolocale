@@ -1,0 +1,109 @@
+#!/usr/bin/env node
+
+var program = require('commander'),
+  pseudolocale = require('..'),
+  fs = require('fs'),
+  path = require('path');
+
+program
+  .version(pseudolocale.version)
+  .option('-d, --delimiter <val>', "sets the token delimiter (default: '%')")
+  .option('-S, --startDelimiter <val>', "sets the start token delimiter (default: delimiter)")
+  .option('-E, --endDelimiter <val>', "sets the end token delimiter (default: delimiter)")
+  .option('-p, --prepend <val>', "sets the string start tag (default: '[!!')")
+  .option('-a, --append <val>', "sets the string end tag (default: '!!]')")
+  .option('-e, --extend <amount>', "sets the padding percentage (default: '0')", parseFloat)
+  .option('-o, --override <char>', "replaces all characters with specified character")
+  .option('-s, --string <str>', "string to pseudolocalealize")
+  .option('-r, --readFile <path>', "path to file to pseudolocalealize")
+  .option('-w, --writeFile <path>', "path of file to write results to");
+
+program.on('--help', function () {
+  console.log('  Examples:');
+  console.log('');
+
+  pseudolocale.option = { prepend: '[@@', append: '@@]' };
+  console.log('  Custom start and end tags');
+  console.log("    $ pseudolocale -p '[@@' -a '@@]' -s 'test'");
+  console.log("    > " + pseudolocale.str('test'));
+  console.log('');
+
+  pseudolocale.reset();
+  pseudolocale.option.override = '_';
+  pseudolocale.option.prepend = '';
+  pseudolocale.option.append = '';
+  console.log('  Replace strings with underscore to spot unlocalized strings');
+  console.log("    $ pseudolocale -p '' -a '' -o '_' -s 'test'");
+  console.log("    > " + pseudolocale.str('test'));
+  console.log('');
+
+  pseudolocale.reset();
+  pseudolocale.option.extend = 0.3;
+  console.log('  Extend strings to ensure space for localization');
+  console.log("    $ pseudolocale -e 0.3 -s 'test string'");
+  console.log("    > " + pseudolocale.str('test string'));
+  console.log('');
+
+  pseudolocale.reset();
+  console.log('  Pseudolocalealize all strings in a JSON file');
+  console.log("    $ pseudolocale -r example.json -w example-pseudo.json");
+  console.log('');
+});
+
+program.parse(process.argv);
+
+if (!program.string && !program.readFile) {
+  console.log('  Either a string (-s) or a file (-r) must be specified.');
+  program.help();
+}
+
+pseudolocale.reset();
+var opts = {
+  delimiter: program.delimiter || pseudolocale.option.delimiter,
+  startDelimiter: program.startDelimiter,
+  endDelimiter: program.endDelimiter,
+  prepend: program.prepend || pseudolocale.option.prepend,
+  append: program.append || pseudolocale.option.append,
+  extend: program.extend || pseudolocale.option.extend,
+  override: program.override || pseudolocale.option.override
+};
+
+pseudolocale.option = opts;
+
+if (program.string) {
+  console.log(pseudolocale.str(program.string));
+}
+else {
+  fs.readFile(program.readFile, { encoding: 'utf8' }, function (err, data) {
+    var process = function (_r) {
+      for (var id in _r) {
+        if (typeof _r[id] === 'string') {
+          _r[id] = pseudolocale.str(_r[id]);
+        } else if (typeof _r[id] === 'object') {
+          process(_r[id]);
+        }
+      }
+    }
+
+    if (err) {
+      console.error('  Unable to read file [' + program.readFile + '].');
+      return;
+    }
+
+    var result = JSON.parse(data);
+    process(result);
+
+    var dir = path.dirname(program.readFile),
+      ext = path.extname(program.readFile),
+      base = path.basename(program.readFile, ext),
+      out = program.writeFile || path.join(dir, base + '-pseudo' + ext);
+
+    fs.writeFile(out, JSON.stringify(result, null, 2), function (err) {
+      if (err) {
+        console.error('  Unable to write file [' + out + '].');
+        return;
+      }
+
+    });
+  });
+}

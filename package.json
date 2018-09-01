@@ -1,0 +1,28 @@
+{
+  "name": "pseudolocale",
+  "version": "1.2.0",
+  "description": "Simple pseudolocale (psuedolocalization) for strings",
+  "keywords": [
+    "localization",
+    "pseudolocale"
+  ],
+  "author": "Martin Cerny <cerny.mrtn@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MartinCerny-awin/pseudolocale"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "commander": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": ">=0.6.3",
+    "jslint": "*",
+    "uglify-js": "*"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha test/**/*-test.js"
+  }
+}
