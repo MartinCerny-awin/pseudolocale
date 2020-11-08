@@ -1,4 +1,4 @@
-pseudolocale.table = {
+const table = {
   A: String.fromCharCode(192),
   a: String.fromCharCode(224),
   B: String.fromCharCode(223),
@@ -44,5 +44,7 @@ pseudolocale.table = {
   Y: String.fromCharCode(374),
   y: String.fromCharCode(375),
   Z: String.fromCharCode(377),
-  z: String.fromCharCode(378)
+  z: String.fromCharCode(378),
 };
+
+export { table };

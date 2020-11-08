@@ -1,5 +1,4 @@
-pseudolocale.pad = function (str, percent) {
-
+export function pad(str: string, percent: number) {
   var lenLeft = Math.floor((str.length * percent) / 2),
     lenRight = lenLeft,
     pStr = str;

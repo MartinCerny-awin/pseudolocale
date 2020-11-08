@@ -1,21 +1,21 @@
 # Pseudolocale
 
-_Pseudolocale_ is a small library for quickly pseudolocalizing strings. [Pseudolocalization](http://en.wikipedia.org/wiki/Pseudolocalealization) is a method for testing the internationalization aspects of your application by replacing your strings with altered versions that maintains string readability while including the most problematic characteristics including text length and character length. It also makes hard coded strings and improperly concatenated strings easy to spot so that they can be properly localized.
+_Pseudolocale_ is a small library for quickly pseudolocalizing strings. [Pseudolocalization](http://en.wikipedia.org/wiki/Pseudolocalealization) is a method for testing the internationalization aspects of your application by replacing your strings with altered versions that maintains string readability while including the most problematic characteristics including text length and character length. It also makes hard coded strings and improperly concatenated strings easy to spot so that they can be properly localized. This library is idempotent eg. it always creates the same string.
 
 ## Using with Node.js
 
     var pseudolocale = require('pseudolocale');
 
-    pseudolocale.str('A test string with a %token%.')
-    // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.!!]
+    pseudolocale('This is going to be pseudolocalized %token%.')
+    // [!!Ţĥĩś ĩś ĝōĩńĝ ţō ƀē ƥśēũďōĺōćàĺĩźēď %token%.!!]
 
 ## Using in a browser
 
-    <script src="../pseudolocale.js" type="text/javascript"></script>
+    <script src="../index.js" type="text/javascript"></script>
     <script type="text/javascript">
 
-      pseudolocale.str('A test string with a %token%.')
-      // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.!!]
+      pseudolocale('This is going to be pseudolocalized %token%.')
+      // [!!Ţĥĩś ĩś ĝōĩńĝ ţō ƀē ƥśēũďōĺōćàĺĩźēď %token%.!!]
 
     </script>
 
@@ -25,8 +25,8 @@ _Pseudolocale_ includes a command line interface to make it easy to incorporate 
 
 Note: Nodejs must be installed to use the command line interface.
 
-    ./bin/pseudolocale --string 'A test string with a %token%.'
-    // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.!!]
+    ./bin/pseudolocale --string 'This is going to be pseudolocalized %token%.'
+    // [!!Ţĥĩś ĩś ĝōĩńĝ ţō ƀē ƥśēũďōĺōćàĺĩźēď %token%.!!]
 
 
     // example.json
@@ -57,8 +57,7 @@ Specifies the string that should be prepended to the beginning of pseudolocalize
 
 Default is `[!!`.
 
-    pseudolocale.option.prepend = '[##';
-    pseudolocale.str('A test string with a %token%.')
+    pseudolocale('This is going to be pseudolocalized %token%.', { prepend: '[##' })
     // [##Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.!!]
 
 #### Append
@@ -67,8 +66,7 @@ Specifies the string that should be appended to the end of pseudolocalized strin
 
 Default is `!!]`.
 
-    pseudolocale.option.append = '##]';
-    pseudolocale.str('A test string with a %token%.')
+    pseudolocale.str('This is going to be pseudolocalized %token%.', { append: '##]' })
     // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.##]
 
 #### Delimiter, StartDelimiter, EndDelimiter
@@ -77,13 +75,10 @@ Specifies the token delimiter. Any characters between token delimiters will not 
 
 Default is `%`.
 
-    pseudolocale.option.delimiter = '$$';
-    pseudolocale.str('A test string with a $$token$$.')
+    pseudolocale('A test string with a $$token$$.', , { delimiter: '$$' })
     // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą $$token$$.!!]
 
-    pseudolocale.option.startDelimiter = '{{';
-    pseudolocale.option.endDelimiter = '}}';
-    pseudolocale.str('A test string with a {{token}}.')
+    pseudolocale('A test string with a {{token}}.', , { startDelimiter: '{{', endDelimiter: '}}' })
     // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą {{token}}.!!]
 
 #### Extend
@@ -92,8 +87,7 @@ Extends the width of the string by the specified percentage. Useful if you will 
 
 Default is `0`.
 
-    pseudolocale.option.extend = 0.3; //30%
-    pseudolocale.str('A test string with a %token%.')
+    pseudolocale.str('This is going to be pseudolocalized %token%.', { extend: 0.3 }) // 30%
     // [!!Ȃ ťēšť ŝťŕĩŉğ ŵĩťħ â %token%.        !!]
 
 
@@ -104,28 +98,22 @@ Specifies an override character that all characters in the string will be replac
 Default is `undefined`.
 
     pseudolocale.option.override = '_';
-    pseudolocale.str('A test string with a %token%.')
+    pseudolocale.str('This is going to be pseudolocalized %token%.')
     // [!!_____________________%token%_!!]
 
 ## Installation
-Using npm:
+Using yarn:
 
-    $ npm install pseudolocale
+    $ yarn
 
 ## Building
 
-To build the minified javascript files for _pseudolocale_, run `npm install` to install dependencies and then:
+To build javascript files for _pseudolocale_, run `yarn` to install dependencies and then:
 
-    $ make build
+    $ npx tsc
 
 ## Running tests
 
 To run the tests for _pseudolocale_, run `npm install` to install dependencies and then:
 
-    $ make test
-
-## Running benchmarks
-
-To run the benchmarks for _pseudolocale_, run `npm install` to install dependencies and then:
-
-    $ make benchmark
+    $ yarn test
