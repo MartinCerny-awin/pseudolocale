@@ -16,13 +16,13 @@
     "commander": "*"
   },
   "devDependencies": {
-    "mocha": "*",
-    "should": ">=0.6.3",
+    "jest": "^26.6.3",
     "jslint": "*",
+    "should": ">=0.6.3",
     "uglify-js": "*"
   },
   "license": "MIT",
   "scripts": {
-    "test": "./node_modules/.bin/mocha test/**/*-test.js"
+    "test": "jest"
   }
 }
