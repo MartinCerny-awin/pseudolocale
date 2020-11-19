@@ -117,3 +117,14 @@ To build javascript files for _pseudolocale_, run `yarn` to install dependencies
 To run the tests for _pseudolocale_, run `npm install` to install dependencies and then:
 
     $ yarn test
+
+## Improvements
+
+- use eslint
+- use prettier
+- fix dependencies
+- add changelog
+- make str file more readable
+- improve documentation
+- minify the code
+- improve commander

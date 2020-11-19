@@ -1,3 +1,3 @@
-import pseudolocale from './str.js';
+import pseudolocale from './str';
 
 export default pseudolocale;

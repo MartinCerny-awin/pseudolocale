@@ -1,15 +1,23 @@
-export function pad(str: string, percent: number) {
-  var lenLeft = Math.floor((str.length * percent) / 2),
-    lenRight = lenLeft,
-    pStr = str;
+function addSpaceBefore(str: string): string {
+  return ` ${str}`;
+}
 
-  while (lenLeft-- > 0) {
-    pStr = ' ' + pStr;
+function addSpaceAfter(str: string): string {
+  return `${str} `;
+}
+
+export function pad(str: string, percent: number): string {
+  let lengthLeft = Math.floor((str.length * percent) / 2);
+  let lengthRight = lengthLeft;
+  let paddedString = str;
+
+  while (lengthLeft-- > 0) {
+    paddedString = addSpaceBefore(paddedString);
   }
 
-  while (lenRight-- > 0) {
-    pStr = pStr + ' ';
+  while (lengthRight-- > 0) {
+    paddedString = addSpaceAfter(paddedString);
   }
 
-  return pStr;
-};
+  return paddedString;
+}
