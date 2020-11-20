@@ -1,6 +1,6 @@
-import { escapeRegExp } from './escapeRegExp';
+import { getTokens } from './token';
 import { pad } from './pad';
-import { table } from './table';
+import { charactersMapping } from './charactersMapping';
 
 interface Options {
   prepend?: string;
@@ -80,41 +80,27 @@ export default function str(str: string, customOptions?: Options): string {
     extend,
     override,
   } = { ...defaultOptions, ...customOptions };
-  const startEscapedDelimiter = escapeRegExp(startDelimiter || delimiter);
-  const endEscapedDelimiter = escapeRegExp(endDelimiter || delimiter);
-  const re = new RegExp(
-    `${startEscapedDelimiter}.*?${endEscapedDelimiter}`,
-    'g',
-  );
-  let m;
-  const tokens = [];
-  let i = 0;
+  const regexTokens = getTokens(str, {
+    startDelimiter,
+    endDelimiter,
+    delimiter,
+  });
+
   let tokenIdx = 0;
   let result = '';
-  let c;
-  let pc;
-
-  while ((m = re.exec(str))) {
-    tokens.push(m);
-  }
-
-  let token = tokens[tokenIdx++] || { index: -1 };
-  while (i < str.length) {
-    if (token.index === i) {
+  while (result.length < str.length) {
+    const token = regexTokens[tokenIdx];
+    const resultLength = result.length;
+    if (token && token.index === resultLength) {
       result += token[0];
-      i += token[0].length;
-      token = tokens[tokenIdx++] || { index: -1 };
+      tokenIdx++;
       continue;
     }
 
-    c = override !== undefined ? override : str[i];
-    pc = table[c as Letter];
-    if (pc) {
-      const diacriticalIndex = str.length % pc.length;
-      c = pc[diacriticalIndex];
-    }
-    result += c;
-    i++;
+    const character = override || str[resultLength];
+    const convertedCharacter = charactersMapping[character as Letter];
+
+    result += convertedCharacter || character;
   }
 
   return prepend + pad(result, extend) + append;

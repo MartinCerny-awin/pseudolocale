@@ -1,4 +1,4 @@
-const table = {
+const charactersMapping = {
   A: String.fromCharCode(192),
   a: String.fromCharCode(224),
   B: String.fromCharCode(223),
@@ -47,4 +47,4 @@ const table = {
   z: String.fromCharCode(378),
 };
 
-export { table };
+export { charactersMapping };
