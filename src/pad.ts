@@ -1,11 +1,3 @@
-function addSpaceBefore(str: string): string {
-  return ` ${str}`;
-}
-
-function addSpaceAfter(str: string): string {
-  return `${str} `;
-}
-
 /**
  * Extends the width of the string by the specified percentage.
  */
@@ -15,11 +7,11 @@ export function pad(str: string, percent: number): string {
   let paddedString = str;
 
   while (lengthLeft-- > 0) {
-    paddedString = addSpaceBefore(paddedString);
+    paddedString = ` ${str}`;
   }
 
   while (lengthRight-- > 0) {
-    paddedString = addSpaceAfter(paddedString);
+    paddedString = `${str} `;
   }
 
   return paddedString;
