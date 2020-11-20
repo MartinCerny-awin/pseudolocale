@@ -1,8 +1,12 @@
 # Pseudolocale
 
-Monthly NPM downloads ![NPM downloads](https://img.shields.io/npm/dm/pseudolocale.svg)
+![NPM downloads](https://img.shields.io/npm/dm/pseudolocale.svg?link=https://www.npmjs.com/package/pseudolocale&link=https://www.npmjs.com/package/pseudolocale)
 
 _Pseudolocale_ is a small library for quickly pseudolocalizing strings. [Pseudolocalization](http://en.wikipedia.org/wiki/Pseudolocalealization) is a method for testing the internationalization aspects of your application by replacing your strings with altered versions that maintains string readability while including the most problematic characteristics including text length and character length. It also makes hard coded strings and improperly concatenated strings easy to spot so that they can be properly localized. This library is idempotent eg. it always creates the same string.
+
+## Instalation
+
+    yarn add pseudolocale
 
 ## Using with Node.js
 
@@ -102,24 +106,26 @@ Default is `undefined`.
     pseudolocale('This is going to be pseudolocalized %token%.', { override: '_' })
     // [!!_____________________%token%_!!]
 
-## Installation
+## Contribution
+
+### Installation
 Using yarn:
 
     $ yarn
 
-## Building
+### Building
 
 To build javascript files for _pseudolocale_, run `yarn` to install dependencies and then:
 
     $ npx tsc
 
-## Running tests
+### Running tests
 
 To run the tests for _pseudolocale_, run `npm install` to install dependencies and then:
 
     $ yarn test
 
-## Improvements
+### Improvements
 
 - add changelog
 - improve documentation
