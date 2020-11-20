@@ -66,7 +66,7 @@ Specifies the string that should be appended to the end of pseudolocalized strin
 
 Default is `!!]`.
 
-    pseudolocale.str('This is going to be pseudolocalized %token%.', { append: '##]' })
+    pseudolocale('This is going to be pseudolocalized %token%.', { append: '##]' })
     // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.##]
 
 #### Delimiter, StartDelimiter, EndDelimiter
@@ -87,7 +87,7 @@ Extends the width of the string by the specified percentage. Useful if you will 
 
 Default is `0`.
 
-    pseudolocale.str('This is going to be pseudolocalized %token%.', { extend: 0.3 }) // 30%
+    pseudolocale('This is going to be pseudolocalized %token%.', { extend: 0.3 }) // 30%
     // [!!Ȃ ťēšť ŝťŕĩŉğ ŵĩťħ â %token%.        !!]
 
 
@@ -97,8 +97,7 @@ Specifies an override character that all characters in the string will be replac
 
 Default is `undefined`.
 
-    pseudolocale.option.override = '_';
-    pseudolocale.str('This is going to be pseudolocalized %token%.')
+    pseudolocale('This is going to be pseudolocalized %token%.', { override: '_' })
     // [!!_____________________%token%_!!]
 
 ## Installation

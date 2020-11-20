@@ -2,4 +2,4 @@ var pseudolocale = require('../index'), // require('pseudolocale') if installed 
     str = 'Thank you for using %pseudolocale.js%.';
 
 console.log('Before: ', str);
-console.log('After : ', pseudolocale.str(str));
+console.log('After : ', pseudolocale(str));
