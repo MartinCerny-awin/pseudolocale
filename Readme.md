@@ -1,5 +1,7 @@
 # Pseudolocale
 
+Monthly NPM downloads https://img.shields.io/npm/dm/pseudolocale.svg
+
 _Pseudolocale_ is a small library for quickly pseudolocalizing strings. [Pseudolocalization](http://en.wikipedia.org/wiki/Pseudolocalealization) is a method for testing the internationalization aspects of your application by replacing your strings with altered versions that maintains string readability while including the most problematic characteristics including text length and character length. It also makes hard coded strings and improperly concatenated strings easy to spot so that they can be properly localized. This library is idempotent eg. it always creates the same string.
 
 ## Using with Node.js
@@ -51,7 +53,7 @@ The command line tool uses the same options as the library. For additional help 
 
 ## Options
 
-#### Prepend
+### Prepend
 
 Specifies the string that should be prepended to the beginning of pseudolocalized strings. The prepended and appended strings help to locate strings that have been cut off or improperly concatenated together - localized strings should use tokens for data since different languages have different word orders.
 
@@ -60,7 +62,7 @@ Default is `[!!`.
     pseudolocale('This is going to be pseudolocalized %token%.', { prepend: '[##' })
     // [##Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.!!]
 
-#### Append
+### Append
 
 Specifies the string that should be appended to the end of pseudolocalized strings. The prepended and appended strings help to locate strings that have been cut off or improperly concatenated together - localized strings should use tokens for data since different languages have different word orders.
 
@@ -69,7 +71,7 @@ Default is `!!]`.
     pseudolocale('This is going to be pseudolocalized %token%.', { append: '##]' })
     // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.##]
 
-#### Delimiter, StartDelimiter, EndDelimiter
+### Delimiter, StartDelimiter, EndDelimiter
 
 Specifies the token delimiter. Any characters between token delimiters will not be pseudolocalized. Tokens are used to replace data within localized strings. You can either specify a single delimiter or use startDelimiter and endDelimiter to specify the delimiters seperately.
 
@@ -81,7 +83,7 @@ Default is `%`.
     pseudolocale('A test string with a {{token}}.', , { startDelimiter: '{{', endDelimiter: '}}' })
     // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą {{token}}.!!]
 
-#### Extend
+### Extend
 
 Extends the width of the string by the specified percentage. Useful if you will be localizing into languages such as German which can be 30% longer than English.
 
@@ -91,7 +93,7 @@ Default is `0`.
     // [!!Ȃ ťēšť ŝťŕĩŉğ ŵĩťħ â %token%.        !!]
 
 
-#### Override
+### Override
 
 Specifies an override character that all characters in the string will be replaced with. Used to easily spot unlocalized strings. Set to `undefined` to go back to regular pseudolocalealization.
 
