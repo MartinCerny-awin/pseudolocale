@@ -2,7 +2,7 @@ import { getTokens } from './token';
 import { pad } from './pad';
 import { charactersMapping } from './charactersMapping';
 
-interface Options {
+export type Options = {
   prepend?: string;
   append?: string;
   delimiter?: string;
@@ -10,7 +10,7 @@ interface Options {
   endDelimiter?: string;
   extend?: number;
   override?: string;
-}
+};
 
 const defaultOptions = {
   prepend: '[!!',

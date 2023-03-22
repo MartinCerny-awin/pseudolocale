@@ -2,6 +2,9 @@
 
 [![npm](https://img.shields.io/npm/v/pseudolocale?logo=npm&cacheSeconds=1800)](https://www.npmjs.com/package/pseudolocale)
 ![NPM downloads](https://img.shields.io/npm/dm/pseudolocale.svg?link=https://www.npmjs.com/package/pseudolocale&link=https://www.npmjs.com/package/pseudolocale)
+[![CI](https://github.com/MartinCerny-awin/pseudolocale/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/MartinCerny-awin/pseudolocale/actions/workflows/ci.yml)
+[![GitHub contributors](https://img.shields.io/github/contributors/MartinCerny-awin/pseudolocale?cacheSeconds=1000)](https://github.com/MartinCerny-awin/pseudolocale/graphs/contributors)
+[![npm](https://img.shields.io/codecov/c/github/MartinCerny-awin/pseudolocale/main.svg)](https://codecov.io/gh/MartinCerny-awin/pseudolocale)
 
 _Pseudolocale_ is a small library for quickly pseudolocalizing strings. [Pseudolocalization](http://en.wikipedia.org/wiki/Pseudolocalealization) is a method for testing the internationalization aspects of your application by replacing your strings with altered versions that maintains string readability while including the most problematic characteristics including text length and character length. It also makes hard coded strings and improperly concatenated strings easy to spot so that they can be properly localized. This library is idempotent eg. it always creates the same string.
 
