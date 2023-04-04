@@ -9,6 +9,7 @@
 _Pseudolocale_ is a small library for quickly pseudolocalizing strings. [Pseudolocalization](http://en.wikipedia.org/wiki/Pseudolocalealization) is a method for testing the internationalization aspects of your application by replacing your strings with altered versions that maintains string readability while including the most problematic characteristics including text length and character length. It also makes hard coded strings and improperly concatenated strings easy to spot so that they can be properly localized. This library is idempotent eg. it always creates the same string.
 
 ## Installation
+
 ```bash
 npm install pseudolocale
 # or
@@ -16,24 +17,24 @@ yarn add pseudolocale
 ```
 
 ## Using with Node.js
+
 ```js
 var pseudolocale = require('pseudolocale');
 
-pseudolocale('This is going to be pseudolocalized %token%.')
+pseudolocale('This is going to be pseudolocalized %token%.');
 // [!!Ţĥĩś ĩś ĝōĩńĝ ţō ƀē ƥśēũďōĺōćàĺĩźēď %token%.!!]
 ```
-  
 
 ## Using in a browser
+
 ```html
 <script src="../index.js" type="text/javascript"></script>
 <script type="text/javascript">
-
-  pseudolocale('This is going to be pseudolocalized %token%.')
+  pseudolocale('This is going to be pseudolocalized %token%.');
   // [!!Ţĥĩś ĩś ĝōĩńĝ ţō ƀē ƥśēũďōĺōćàĺĩźēď %token%.!!]
-
 </script>
 ```
+
 ## Using from the command line
 
 _Pseudolocale_ includes a command line interface to make it easy to incorporate it into your build process. Currently it supports passing in individual strings (great for trying things out) or passing in a valid `JSON` document that contains a set of keys and strings. Each of the strings in the file will then be pseudolocalized.
@@ -44,6 +45,7 @@ Note: Nodejs must be installed to use the command line interface.
 ./bin/pseudolocale --string 'This is going to be pseudolocalized %token%.'
 # [!!Ţĥĩś ĩś ĝōĩńĝ ţō ƀē ƥśēũďōĺōćàĺĩźēď %token%.!!]
 ```
+
 ```json
 // example.json
 {
@@ -52,9 +54,11 @@ Note: Nodejs must be installed to use the command line interface.
   "string3": "a string with a %couple% of %tokens%"
 }
 ```
+
 ```bash
 ./bin/pseudolocale --readFile example.json --writeFile example-pseudo.json
 ```
+
 ```json
 // example-pseudo.json
 {
@@ -66,7 +70,7 @@ Note: Nodejs must be installed to use the command line interface.
 
 The command line tool uses the same options as the library. For additional help and more examples:
 
-```bash 
+```bash
 ./bin/pseudolocale --help
 ```
 
@@ -77,8 +81,11 @@ The command line tool uses the same options as the library. For additional help 
 Specifies the string that should be prepended to the beginning of pseudolocalized strings. The prepended and appended strings help to locate strings that have been cut off or improperly concatenated together - localized strings should use tokens for data since different languages have different word orders.
 
 Default is `[!!`.
+
 ```js
-pseudolocale('This is going to be pseudolocalized %token%.', { prepend: '[##' })
+pseudolocale('This is going to be pseudolocalized %token%.', {
+  prepend: '[##',
+});
 // [##Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.!!]
 ```
 
@@ -89,7 +96,7 @@ Specifies the string that should be appended to the end of pseudolocalized strin
 Default is `!!]`.
 
 ```js
-pseudolocale('This is going to be pseudolocalized %token%.', { append: '##]' })
+pseudolocale('This is going to be pseudolocalized %token%.', { append: '##]' });
 // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą %token%.##]
 ```
 
@@ -100,10 +107,13 @@ Specifies the token delimiter. Any characters between token delimiters will not 
 Default is `%`.
 
 ```js
-pseudolocale('A test string with a $$token$$.', { delimiter: '$$' })
+pseudolocale('A test string with a $$token$$.', { delimiter: '$$' });
 // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą $$token$$.!!]
 
-pseudolocale('A test string with a {{token}}.', { startDelimiter: '{{', endDelimiter: '}}' })
+pseudolocale('A test string with a {{token}}.', {
+  startDelimiter: '{{',
+  endDelimiter: '}}',
+});
 // [!!Á ţȇšŧ śťřīņğ ŵıţħ ą {{token}}.!!]
 ```
 
@@ -114,7 +124,7 @@ Extends the width of the string by the specified percentage. Useful if you will 
 Default is `0`.
 
 ```js
-pseudolocale('This is going to be pseudolocalized %token%.', { extend: 0.3 }) // 30%
+pseudolocale('This is going to be pseudolocalized %token%.', { extend: 0.3 }); // 30%
 // [!!Ȃ ťēšť ŝťŕĩŉğ ŵĩťħ â %token%.        !!]
 ```
 
@@ -125,19 +135,19 @@ Specifies an override character that all characters in the string will be replac
 Default is `undefined`.
 
 ```js
-pseudolocale('This is going to be pseudolocalized %token%.', { override: '_' })
+pseudolocale('This is going to be pseudolocalized %token%.', { override: '_' });
 // [!!_____________________%token%_!!]
 ```
 
 ## Contribution
 
 ### Installation
+
 Using yarn:
 
 ```bash
 yarn
 ```
-
 
 ### Building
 
