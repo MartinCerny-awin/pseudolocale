@@ -1,4 +1,4 @@
-const charactersMapping = {
+export const charactersMapping = {
   A: String.fromCharCode(192),
   a: String.fromCharCode(224),
   B: String.fromCharCode(223),
@@ -46,5 +46,3 @@ const charactersMapping = {
   Z: String.fromCharCode(377),
   z: String.fromCharCode(378),
 };
-
-export { charactersMapping };
