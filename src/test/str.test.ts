@@ -61,7 +61,7 @@ describe('pseudolocale', () => {
     expect(s1.indexOf('%%this%%')).not.toBe(-1);
   });
 
-  xit('should pad the string be the specified pad amount', () => {
+  it('should pad the string be the specified pad amount', () => {
     const options = { extend: 0.2 };
     const s1 = pseudolocale('this is a test string', options);
 
