@@ -30,7 +30,7 @@ _Pseudolocale_ includes a command line interface to make it easy to incorporate 
 Note: Nodejs must be installed to use the command line interface.
 
 ```bash
-./bin/pseudolocale --string 'This is going to be pseudolocalized %token%.'
+./dist/cli.mjs --string 'This is going to be pseudolocalized %token%.'
 # [!!Ţĥĩś ĩś ĝōĩńĝ ţō ƀē ƥśēũďōĺōćàĺĩźēď %token%.!!]
 ```
 
