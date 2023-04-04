@@ -12,8 +12,6 @@ _Pseudolocale_ is a small library for quickly pseudolocalizing strings. [Pseudol
 
 ```bash
 npm install pseudolocale
-# or
-yarn add pseudolocale
 ```
 
 ## Using with Node.js
@@ -23,16 +21,6 @@ var pseudolocale = require('pseudolocale');
 
 pseudolocale('This is going to be pseudolocalized %token%.');
 // [!!Ţĥĩś ĩś ĝōĩńĝ ţō ƀē ƥśēũďōĺōćàĺĩźēď %token%.!!]
-```
-
-## Using in a browser
-
-```html
-<script src="../index.js" type="text/javascript"></script>
-<script type="text/javascript">
-  pseudolocale('This is going to be pseudolocalized %token%.');
-  // [!!Ţĥĩś ĩś ĝōĩńĝ ţō ƀē ƥśēũďōĺōćàĺĩźēď %token%.!!]
-</script>
 ```
 
 ## Using from the command line
@@ -143,15 +131,15 @@ pseudolocale('This is going to be pseudolocalized %token%.', { override: '_' });
 
 ### Installation
 
-Using yarn:
+Using npm:
 
 ```bash
-yarn
+npm i
 ```
 
 ### Building
 
-To build javascript files for _pseudolocale_, run `yarn` to install dependencies and then:
+To build javascript files for _pseudolocale_, run `npm i` to install dependencies and then:
 
 ```bash
 npx tsc
@@ -159,10 +147,10 @@ npx tsc
 
 ### Running tests
 
-To run the tests for _pseudolocale_, run `npm install` to install dependencies and then:
+To run the tests for _pseudolocale_, run `npm i` to install dependencies and then:
 
 ```bash
-yarn test
+npm test
 ```
 
 ### Improvements
