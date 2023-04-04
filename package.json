@@ -37,7 +37,7 @@
     "prepublishOnly": "yarn build",
     "test": "jest",
     "lint:types": "tsc",
-    "prettier:check": "prettier --check '**/*.{ts,tsx,js,jsx}'",
+    "prettier:check": "prettier --check '**/*.{ts,tsx}'",
     "lint": "eslint 'src/**/*.{js,ts,tsx}' && prettier -c {src,.}/**/*.ts --write && yarn lint:types"
   },
   "dependencies": {
