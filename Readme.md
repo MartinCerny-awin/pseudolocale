@@ -159,3 +159,11 @@ npm test
 - improve documentation
 - minify the code
 - improve commander
+
+
+## Publish to npm
+
+```bash
+npm login
+npm publish
+```
