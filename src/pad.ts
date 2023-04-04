@@ -7,11 +7,11 @@ export function pad(str: string, percent: number): string {
   let paddedString = str;
 
   while (lengthLeft-- > 0) {
-    paddedString = ` ${str}`;
+    paddedString = ` ${paddedString}`;
   }
 
   while (lengthRight-- > 0) {
-    paddedString = `${str} `;
+    paddedString = `${paddedString} `;
   }
 
   return paddedString;
