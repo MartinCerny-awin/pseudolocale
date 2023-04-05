@@ -6,6 +6,7 @@
     "declaration": true,
     "noEmit": true,
     "strict": true,
+    "noUnusedLocals": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,

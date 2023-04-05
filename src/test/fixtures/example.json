@@ -3,6 +3,10 @@
   "string2": "a string with a %token%",
   "string3": "a string with a %couple% of %tokens%",
   "numbers": 123456790,
+  "array": [
+    "this is the string in array",
+    "this is the second string in array"
+  ],
   "deep1": {
     "string1": "this is the second string",
     "string2": "a string with a %token%",
