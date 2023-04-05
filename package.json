@@ -34,11 +34,11 @@
   "license": "MIT",
   "scripts": {
     "build": "unbuild",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "npm run build",
     "test": "jest",
     "lint:types": "tsc",
     "prettier:check": "prettier --check '**/*.{ts,tsx}'",
-    "lint": "eslint 'src/**/*.{js,ts,tsx}' && prettier -c {src,.}/**/*.ts --write && yarn lint:types"
+    "lint": "eslint 'src/**/*.{js,ts,tsx}' && prettier -c {src,.}/**/*.ts --write && npm run lint:types"
   },
   "dependencies": {
     "commander": "^10.0.0"
