@@ -158,7 +158,7 @@ To run the tests for _pseudolocale_, run `npm i` to install dependencies and the
 npm test
 ```
 
-## Publish to npm
+## Release new version
 
 ```bash
 npm login
