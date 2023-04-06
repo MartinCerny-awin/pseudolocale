@@ -12,12 +12,17 @@ _Pseudolocale_ is a small library for quickly pseudolocalizing strings. [Pseudol
 
 ```bash
 npm install pseudolocale
+# or
+yarn add pseudolocale
 ```
 
 ## Using with Node.js
 
 ```js
-var pseudolocale = require('pseudolocale');
+const pseudolocale = require('pseudolocale');
+
+// or using ESM
+import pseudolocale from 'pseudolocale';
 
 pseudolocale('This is going to be pseudolocalized %token%.');
 // [!!Ţĥĩś ĩś ĝōĩńĝ ţō ƀē ƥśēũďōĺōćàĺĩźēď %token%.!!]
@@ -30,12 +35,12 @@ _Pseudolocale_ includes a command line interface to make it easy to incorporate 
 Note: Nodejs must be installed to use the command line interface.
 
 ```bash
-./dist/cli.mjs --string 'This is going to be pseudolocalized %token%.'
+pseudolocale --string 'This is going to be pseudolocalized %token%.'
 # [!!Ţĥĩś ĩś ĝōĩńĝ ţō ƀē ƥśēũďōĺōćàĺĩźēď %token%.!!]
 ```
 
+example.json
 ```json
-// example.json
 {
   "string1": "this is the first string",
   "string2": "a string with a %token%",
@@ -44,11 +49,11 @@ Note: Nodejs must be installed to use the command line interface.
 ```
 
 ```bash
-./bin/pseudolocale --readFile example.json --writeFile example-pseudo.json
+pseudolocale --readFile example.json --writeFile example-pseudo.json
 ```
 
+example-pseudo.json
 ```json
-// example-pseudo.json
 {
   "string1": "[!!ţĥĩş ĭś ťĥě ƒĩŗśŧ şţřįƞĝ!!]",
   "string2": "[!!ȁ ŝťŗĩňğ ŵįťĥ ã %token%!!]",
@@ -59,7 +64,7 @@ Note: Nodejs must be installed to use the command line interface.
 The command line tool uses the same options as the library. For additional help and more examples:
 
 ```bash
-./bin/pseudolocale --help
+pseudolocale --help
 ```
 
 ## Options
@@ -142,7 +147,7 @@ npm i
 To build javascript files for _pseudolocale_, run `npm i` to install dependencies and then:
 
 ```bash
-npx tsc
+npm run build
 ```
 
 ### Running tests
@@ -152,14 +157,6 @@ To run the tests for _pseudolocale_, run `npm i` to install dependencies and the
 ```bash
 npm test
 ```
-
-### Improvements
-
-- add changelog
-- improve documentation
-- minify the code
-- improve commander
-
 
 ## Publish to npm
 

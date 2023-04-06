@@ -32,7 +32,7 @@ jobs:
         run: npm run lint:types
 
       - name: Test
-        run: npm test -- --coverage
+        run: npm test -- --coverage --runInBand
 
       - name: Check coverage
         uses: codecov/codecov-action@v3
