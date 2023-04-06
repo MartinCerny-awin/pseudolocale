@@ -160,7 +160,14 @@ npm test
 
 ## Release new version
 
+1. change version in package.json
+
+2. Publish to npm
 ```bash
 npm login
 npm publish
 ```
+
+3. Push `package.json` & `package-lock.json` to origin.
+4. Go to GitHub releases https://github.com/MartinCerny-awin/pseudolocale/releases and create new release
+
