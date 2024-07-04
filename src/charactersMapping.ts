@@ -23,6 +23,8 @@ export const charactersMapping = {
   k: String.fromCharCode(311),
   L: String.fromCharCode(313),
   l: String.fromCharCode(314),
+  M: String.fromCharCode(7742),
+  m: String.fromCharCode(7743),
   N: String.fromCharCode(323),
   n: String.fromCharCode(324),
   O: String.fromCharCode(332),
