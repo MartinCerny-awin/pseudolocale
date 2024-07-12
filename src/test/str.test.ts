@@ -6,7 +6,7 @@ describe('pseudolocale', () => {
   });
 
   it('should produce a pseudolocalized version', () => {
-    expect(pseudolocale('test string')).toBe('[!!ţēśţ śţŕĩńĝ!!]');
+    expect(pseudolocale('my test string')).toBe('[!!ḿŷ ţēśţ śţŕĩńĝ!!]');
   });
 
   it('should produce a string longer than original', () => {
