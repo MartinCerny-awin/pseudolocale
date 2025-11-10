@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ES2020",
+    "module": "NodeNext",
     "moduleResolution": "Node16",
     "declaration": true,
     "noEmit": true,
