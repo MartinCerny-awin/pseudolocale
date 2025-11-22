@@ -40,6 +40,7 @@ pseudolocale --string 'This is going to be pseudolocalized %token%.'
 ```
 
 example.json
+
 ```json
 {
   "string1": "this is the first string",
@@ -53,6 +54,7 @@ pseudolocale --readFile example.json --writeFile example-pseudo.json
 ```
 
 example-pseudo.json
+
 ```json
 {
   "string1": "[!!ţĥĩş ĭś ťĥě ƒĩŗśŧ şţřįƞĝ!!]",
@@ -160,14 +162,31 @@ npm test
 
 ## Release new version
 
-1. change version in package.json
+1. Run tests to ensure everything is working:
 
-2. Publish to npm
+```bash
+npm test
+```
+
+2. Bump the version (patch, minor, or major). This will update `package.json`, `package-lock.json`, and create a git commit and tag:
+
+```bash
+npm version patch
+# or npm version minor
+# or npm version major
+```
+
+3. Push the commit and tags to the repository:
+
+```bash
+git push --follow-tags
+```
+
+4. Publish to npm (this will automatically run the build script):
+
 ```bash
 npm login
 npm publish
 ```
 
-3. Push `package.json` & `package-lock.json` to origin.
-4. Go to GitHub releases https://github.com/MartinCerny-awin/pseudolocale/releases and create new release
-
+5. Go to GitHub releases https://github.com/MartinCerny-awin/pseudolocale/releases and create a new release from the new tag
