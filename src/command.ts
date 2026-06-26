@@ -35,6 +35,10 @@ export function makeProgram(): Command {
       parseFloat,
     )
     .option(
+      '-c, --extendCharacter <char>',
+      "sets the character used for padding when extending (default: ' ')",
+    )
+    .option(
       '-o, --override <char>',
       'replaces all characters with specified character',
     )
@@ -69,6 +73,14 @@ export function makeProgram(): Command {
       console.log('  Extend strings to ensure space for localization');
       console.log("    $ pseudolocale -e 0.3 -s 'test string'");
       console.log('    > ' + pseudolocale('test string', { extend: 0.3 }));
+      console.log('');
+
+      console.log('  Extend strings with a custom character');
+      console.log("    $ pseudolocale -e 0.3 -c '~' -s 'test string'");
+      console.log(
+        '    > ' +
+          pseudolocale('test string', { extend: 0.3, extendCharacter: '~' }),
+      );
       console.log('');
 
       console.log('  Pseudolocalize all strings in a JSON file');

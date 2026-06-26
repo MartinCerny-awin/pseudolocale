@@ -61,11 +61,21 @@ describe('pseudolocale', () => {
     expect(s1.indexOf('%%this%%')).not.toBe(-1);
   });
 
-  it('should pad the string be the specified pad amount', () => {
+  it('should pad the string be the specified pad amount (with whitespace as default)', () => {
     const options = { extend: 0.2 };
     const s1 = pseudolocale('this is a test string', options);
 
     expect(s1.length).toBe(31);
+    expect(s1.indexOf('~')).toBe(-1);
+  });
+
+  it('should pad with a custom character when extendCharacter is set', () => {
+    const options = { extend: 0.2, extendCharacter: '~' };
+    const s1 = pseudolocale('this is a test string', options);
+
+    expect(s1.length).toBe(31);
+    expect(s1.startsWith('[!!~~')).toBe(true);
+    expect(s1.endsWith('~~!!]')).toBe(true);
   });
 
   it('should support a custom start token', () => {

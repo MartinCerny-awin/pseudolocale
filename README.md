@@ -123,6 +123,20 @@ pseudolocale('This is going to be pseudolocalized %token%.', { extend: 0.3 }); /
 // [!!Ȃ ťēšť ŝťŕĩŉğ ŵĩťħ â %token%.        !!]
 ```
 
+### ExtendCharacter
+
+Specifies the character used to pad the string when extending. Useful when you want the added width to be visible instead of using whitespace.
+
+Default is `' '` (a space).
+
+```js
+pseudolocale('This is going to be pseudolocalized %token%.', {
+  extend: 0.3,
+  extendCharacter: '~',
+}); // 30%
+// [!!~~~~~~Ţĥĩś ĩś ĝōĩńĝ ţō ƀē ƥśēũďōĺōćàĺĩźēď %token%.~~~~~~!!]
+```
+
 ### Override
 
 Specifies an override character that all characters in the string will be replaced with. Used to easily spot unlocalized strings. Set to `undefined` to go back to regular pseudolocalealization.
