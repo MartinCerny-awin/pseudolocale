@@ -78,6 +78,15 @@ describe('pseudolocale', () => {
     expect(s1.endsWith('~~!!]')).toBe(true);
   });
 
+  it('should hit the target percentage with a multi-character extendCharacter', () => {
+    const options = { extend: 0.2, extendCharacter: '~~' };
+    const s1 = pseudolocale('this is a test string', options);
+
+    expect(s1.length).toBe(31);
+    expect(s1.startsWith('[!!~~')).toBe(true);
+    expect(s1.endsWith('~~!!]')).toBe(true);
+  });
+
   it('should support a custom start token', () => {
     const options = { prepend: 'start' };
     const s1 = pseudolocale('this is a test string', options);

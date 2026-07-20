@@ -1,19 +1,17 @@
 /**
  * Extends the width of the string by the specified percentage.
  * The character used for padding can be customized (defaults to a space).
+ * Multi-character strings are repeated/truncated so the target percentage
+ * length is still hit exactly.
  */
 export function pad(str: string, percent: number, character = ' '): string {
-  let lengthLeft = Math.floor((str.length * percent) / 2);
-  let lengthRight = lengthLeft;
-  let paddedString = str;
+  const lengthLeft = Math.floor((str.length * percent) / 2);
+  const lengthRight = lengthLeft;
 
-  while (lengthLeft-- > 0) {
-    paddedString = `${character}${paddedString}`;
-  }
+  if (!character.length) return str;
 
-  while (lengthRight-- > 0) {
-    paddedString = `${paddedString}${character}`;
-  }
+  const padSide = (length: number) =>
+    character.repeat(Math.ceil(length / character.length)).slice(0, length);
 
-  return paddedString;
+  return `${padSide(lengthLeft)}${str}${padSide(lengthRight)}`;
 }
