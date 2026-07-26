@@ -9,6 +9,7 @@ export type Options = {
   startDelimiter?: string;
   endDelimiter?: string;
   extend?: number;
+  extendCharacter?: string;
   override?: string;
 };
 
@@ -19,6 +20,7 @@ const defaultOptions = {
   startDelimiter: '',
   endDelimiter: '',
   extend: 0,
+  extendCharacter: ' ',
   override: undefined,
 };
 
@@ -80,6 +82,7 @@ export default function str(str: string, customOptions?: Options): string {
     prepend,
     append,
     extend,
+    extendCharacter,
     override,
   } = { ...defaultOptions, ...customOptions };
   const regexTokens = getTokens(str, {
@@ -105,5 +108,5 @@ export default function str(str: string, customOptions?: Options): string {
     result += convertedCharacter || character;
   }
 
-  return prepend + pad(result, extend) + append;
+  return prepend + pad(result, extend, extendCharacter) + append;
 }
