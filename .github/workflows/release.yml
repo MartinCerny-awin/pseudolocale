@@ -21,12 +21,15 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           cache: npm
 
+      # Trusted publishing (OIDC) needs npm >=11.5.1; node 20 ships npm 10.
+      # Pin to 11.x: gets OIDC without npm 12's install-time script restrictions.
+      - run: npm install -g npm@11
+
       - run: npm ci
 
-      # prepublishOnly runs the build; --provenance needs npm >=9.5 (node 20 ships it)
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # No token: npm authenticates via the id-token below (trusted publishing).
+      # prepublishOnly runs the build; provenance is automatic with OIDC.
+      - run: npm publish --access public
 
       - run: gh release create "$GITHUB_REF_NAME" --generate-notes
         env:
