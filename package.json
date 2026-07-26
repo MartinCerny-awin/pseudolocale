@@ -1,6 +1,6 @@
 {
   "name": "pseudolocale",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Simple pseudolocale (psuedolocalization) for strings",
   "keywords": [
     "localization",
@@ -44,7 +44,7 @@
     "commander": "^10.0.0"
   },
   "files": [
-    "Readme.md",
+    "README.md",
     "dist/"
   ],
   "devDependencies": {
