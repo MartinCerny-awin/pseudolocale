@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import pseudolocale from '../index';
 
 describe('pseudolocale', () => {

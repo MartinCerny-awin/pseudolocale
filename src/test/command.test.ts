@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { makeProgram } from '../command';
 import path from 'node:path';
 import fs from 'node:fs/promises';
@@ -5,13 +6,13 @@ import os from 'node:os';
 
 describe('Command', () => {
   beforeEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it('Should support --string param', async () => {
     const program = makeProgram();
 
-    const spy = jest.spyOn(console, 'log').mockImplementation();
+    const spy = vi.spyOn(console, 'log').mockImplementation(() => undefined);
 
     await program.parseAsync(
       ['--string', 'This is going to be pseudolocalized %token%.'],
@@ -30,8 +31,10 @@ describe('Command', () => {
   it('Should pseudolocalize files', async () => {
     const program = makeProgram();
 
-    const logSpy = jest.spyOn(console, 'log').mockImplementation();
-    const errorSpy = jest.spyOn(console, 'error').mockImplementation();
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    const errorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => undefined);
 
     const tmpDir = await fs.mkdtemp(
       path.join(os.tmpdir(), `lingui-test-${process.pid}`),
@@ -72,7 +75,7 @@ describe('Command', () => {
         }
       }"
     `);
-    expect(logSpy).not.toBeCalled();
-    expect(errorSpy).not.toBeCalled();
+    expect(logSpy).not.toHaveBeenCalled();
+    expect(errorSpy).not.toHaveBeenCalled();
   });
 });
