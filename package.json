@@ -1,6 +1,6 @@
 {
   "name": "pseudolocale",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "description": "Simple pseudolocale (psuedolocalization) for strings",
   "keywords": [
     "localization",
@@ -11,12 +11,14 @@
     "type": "git",
     "url": "https://github.com/MartinCerny-awin/pseudolocale"
   },
-  "bin": "./dist/cli.mjs",
+  "bin": {
+    "pseudolocale": "./dist/cli.mjs"
+  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=24.0.0"
   },
   "exports": {
     ".": {
@@ -41,7 +43,7 @@
     "lint": "eslint src && prettier -c {src,.}/**/*.ts --write && npm run lint:types"
   },
   "dependencies": {
-    "commander": "^10.0.0"
+    "commander": "^13.1.0"
   },
   "files": [
     "README.md",
