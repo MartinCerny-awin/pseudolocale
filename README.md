@@ -18,14 +18,19 @@ yarn add pseudolocale
 
 ## Using with Node.js
 
-```js
-const pseudolocale = require('pseudolocale');
+Requires Node.js 24+. The package is ESM-only.
 
-// or using ESM
+```js
 import pseudolocale from 'pseudolocale';
 
 pseudolocale('This is going to be pseudolocalized %token%.');
 // [!!Ţĥĩś ĩś ĝōĩńĝ ţō ƀē ƥśēũďōĺōćàĺĩźēď %token%.!!]
+```
+
+From a CommonJS project it works via Node's `require(esm)`:
+
+```js
+const pseudolocale = require('pseudolocale').default;
 ```
 
 ## Using from the command line
