@@ -28,6 +28,21 @@ describe('Command', () => {
     `);
   });
 
+  it('Should pass --extendCharacter through to the padding', async () => {
+    const program = makeProgram();
+
+    const spy = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+
+    await program.parseAsync(
+      ['-e', '0.2', '-c', '~', '--string', 'test string'],
+      { from: 'user' },
+    );
+
+    const output = spy.mock.calls[0][0] as string;
+    expect(output.startsWith('[!!~')).toBe(true);
+    expect(output.endsWith('~!!]')).toBe(true);
+  });
+
   it('Should pseudolocalize files', async () => {
     const program = makeProgram();
 
