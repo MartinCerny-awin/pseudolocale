@@ -127,11 +127,11 @@ async function command(program: Command) {
     try {
       await fs.mkdir(path.dirname(out), { recursive: true });
       await fs.writeFile(out, result);
-    } catch (e) {
+    } catch {
       console.error('  Unable to write file [' + out + '].');
       return;
     }
-  } catch (e) {
+  } catch {
     console.error('  Unable to read file [' + cliOptions.readFile + '].');
     return;
   }
