@@ -111,4 +111,66 @@ describe('pseudolocale', () => {
   it('should be idempotent', () => {
     expect(pseudolocale('test string')).toBe('[!!ţēśţ śţŕĩńĝ!!]');
   });
+
+  describe('rightToLeft (RTL / bidi)', () => {
+    it('should produce an RTL pseudolocalized string wrapped with RLO and PDF', () => {
+      expect(pseudolocale('my test string', { rightToLeft: true })).toBe(
+        '[!!\u202Eɯʎ ʇǝsʇ sʇɹıuƃ\u202C!!]',
+      );
+    });
+
+    it('should isolate tokens outside RLO and PDF spans', () => {
+      expect(
+        pseudolocale('my name is %token% today', { rightToLeft: true }),
+      ).toBe('[!!\u202Eɯʎ uɐɯǝ ıs \u202C%token%\u202E ʇopɐʎ\u202C!!]');
+    });
+
+    it('should handle start and end delimiters in RTL mode', () => {
+      expect(
+        pseudolocale('my name is {name}', {
+          rightToLeft: true,
+          startDelimiter: '{',
+          endDelimiter: '}',
+        }),
+      ).toBe('[!!\u202Eɯʎ uɐɯǝ ıs \u202C{name}!!]');
+    });
+
+    it('should handle token at the beginning of the string', () => {
+      expect(
+        pseudolocale('{name} is here', {
+          rightToLeft: true,
+          startDelimiter: '{',
+          endDelimiter: '}',
+        }),
+      ).toBe('[!!{name}\u202E ıs ɥǝɹǝ\u202C!!]');
+    });
+
+    it('should support custom prepend and append in RTL mode', () => {
+      expect(
+        pseudolocale('test', {
+          rightToLeft: true,
+          prepend: '[@@',
+          append: '@@]',
+        }),
+      ).toBe('[@@\u202Eʇǝsʇ\u202C@@]');
+    });
+
+    it('should support extend padding in RTL mode', () => {
+      const result = pseudolocale('test', {
+        rightToLeft: true,
+        extend: 0.5,
+        extendCharacter: '~',
+      });
+      expect(result).toBe('[!!~\u202Eʇǝsʇ\u202C~!!]');
+    });
+
+    it('should support override in RTL mode', () => {
+      expect(
+        pseudolocale('test', {
+          rightToLeft: true,
+          override: '_',
+        }),
+      ).toBe('[!!\u202E____\u202C!!]');
+    });
+  });
 });

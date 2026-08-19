@@ -42,6 +42,10 @@ export function makeProgram(): Command {
       '-o, --override <char>',
       'replaces all characters with specified character',
     )
+    .option(
+      '--rightToLeft',
+      'enables right-to-left pseudolocalization (default: false)',
+    )
     .option('-s, --string <str>', 'string to pseudolocalize')
     .option('-r, --readFile <path>', 'path to file to pseudolocalize')
     .option('-w, --writeFile <path>', 'path of file to write results to');
@@ -81,6 +85,11 @@ export function makeProgram(): Command {
         '    > ' +
           pseudolocale('test string', { extend: 0.3, extendCharacter: '~' }),
       );
+      console.log('');
+
+      console.log('  Right-to-left (RTL) pseudolocalization');
+      console.log("    $ pseudolocale --rightToLeft -s 'test'");
+      console.log('    > ' + pseudolocale('test', { rightToLeft: true }));
       console.log('');
 
       console.log('  Pseudolocalize all strings in a JSON file');

@@ -93,4 +93,25 @@ describe('Command', () => {
     expect(logSpy).not.toHaveBeenCalled();
     expect(errorSpy).not.toHaveBeenCalled();
   });
+
+  it('Should support --rightToLeft param', async () => {
+    const program = makeProgram();
+
+    const spy = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+
+    await program.parseAsync(
+      [
+        '--rightToLeft',
+        '--string',
+        'This is going to be pseudolocalized %token%.',
+      ],
+      { from: 'user' },
+    );
+
+    expect(spy.mock.calls).toEqual([
+      [
+        '[!!\u202E⊥ɥıs ıs ƃoıuƃ ʇo qǝ dsǝnpoʅoɔɐʅızǝp \u202C%token%\u202E.\u202C!!]',
+      ],
+    ]);
+  });
 });
