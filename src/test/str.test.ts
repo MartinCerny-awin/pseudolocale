@@ -172,5 +172,27 @@ describe('pseudolocale', () => {
         }),
       ).toBe('[!!\u202E____\u202C!!]');
     });
+
+    it('should not flip numbers in RTL mode', () => {
+      expect(
+        pseudolocale('Welcome123 to 456 the 780jungle', { rightToLeft: true }),
+      ).toBe(
+        '[!!\u202EMǝʅɔoɯǝ\u202C123\u202E ʇo \u202C456\u202E ʇɥǝ \u202C780\u202Eɾnuƃʅǝ\u202C!!]',
+      );
+    });
+
+    it('should handle numbers at start, end, and around tokens in RTL mode', () => {
+      expect(pseudolocale('123 test 456', { rightToLeft: true })).toBe(
+        '[!!123\u202E ʇǝsʇ \u202C456!!]',
+      );
+    });
+
+    it('should not modify delimited strings containing numbers in RTL mode', () => {
+      expect(
+        pseudolocale('user %user123% has 456 points', { rightToLeft: true }),
+      ).toBe(
+        '[!!\u202Ensǝɹ \u202C%user123%\u202E ɥɐs \u202C456\u202E doıuʇs\u202C!!]',
+      );
+    });
   });
 });

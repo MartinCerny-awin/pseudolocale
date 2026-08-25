@@ -73,6 +73,7 @@ export default function str(str: string, customOptions?: Options): string {
     startDelimiter,
     endDelimiter,
     delimiter,
+    rightToLeft,
   });
 
   let lastIndex = 0;

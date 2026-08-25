@@ -6,17 +6,22 @@ interface Delimiters {
   startDelimiter: string;
   endDelimiter: string;
   delimiter: string;
+  rightToLeft?: boolean;
 }
 
 function getDelimiterRegExp({
   startDelimiter,
   endDelimiter,
   delimiter,
+  rightToLeft,
 }: Delimiters): RegExp {
   const startEscapedDelimiter = escapeRegExp(startDelimiter || delimiter);
   const endEscapedDelimiter = escapeRegExp(endDelimiter || delimiter);
 
-  return new RegExp(`${startEscapedDelimiter}.*?${endEscapedDelimiter}`, 'g');
+  const delimittedPattern = `${startEscapedDelimiter}.*?${endEscapedDelimiter}`;
+  const pattern = rightToLeft ? `${delimittedPattern}|\\d+` : delimittedPattern;
+
+  return new RegExp(pattern, 'g');
 }
 
 /**
@@ -24,13 +29,9 @@ function getDelimiterRegExp({
  */
 export function getTokens(
   str: string,
-  { startDelimiter, endDelimiter, delimiter }: Delimiters,
+  delimiters: Delimiters,
 ): RegExpExecArray[] {
-  const delimiterRegExp = getDelimiterRegExp({
-    startDelimiter,
-    endDelimiter,
-    delimiter,
-  });
+  const delimiterRegExp = getDelimiterRegExp(delimiters);
 
   let regexResult;
   const regexResults = [];
