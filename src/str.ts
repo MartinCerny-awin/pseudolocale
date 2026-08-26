@@ -1,6 +1,6 @@
 import { getTokens } from './token';
 import { pad } from './pad';
-import { charactersMapping } from './charactersMapping';
+import { charactersMapping, bidiCharactersMapping } from './charactersMapping';
 
 export type Options = {
   prepend?: string;
@@ -11,6 +11,7 @@ export type Options = {
   extend?: number;
   extendCharacter?: string;
   override?: string;
+  rightToLeft?: boolean;
 };
 
 const defaultOptions = {
@@ -22,57 +23,39 @@ const defaultOptions = {
   extend: 0,
   extendCharacter: ' ',
   override: undefined,
+  rightToLeft: false,
 };
 
-type Letter =
-  | 'A'
-  | 'a'
-  | 'B'
-  | 'b'
-  | 'C'
-  | 'c'
-  | 'D'
-  | 'd'
-  | 'E'
-  | 'e'
-  | 'F'
-  | 'f'
-  | 'G'
-  | 'g'
-  | 'H'
-  | 'h'
-  | 'I'
-  | 'i'
-  | 'J'
-  | 'j'
-  | 'K'
-  | 'k'
-  | 'L'
-  | 'l'
-  | 'M'
-  | 'm'
-  | 'N'
-  | 'n'
-  | 'O'
-  | 'o'
-  | 'P'
-  | 'p'
-  | 'Q'
-  | 'q'
-  | 'R'
-  | 'r'
-  | 'S'
-  | 's'
-  | 'T'
-  | 't'
-  | 'U'
-  | 'u'
-  | 'W'
-  | 'w'
-  | 'Y'
-  | 'y'
-  | 'Z'
-  | 'z';
+/** Unicode character used to enforce right-to-left text rendering. */
+const RLO = '\u202E';
+
+/** Unicode character used to reset text rendering direction. */
+const PDF = '\u202C';
+
+/**
+ * Transforms a single chunk of text according to the character mapping.
+ *
+ * The input string may contain interpolations such as `%name%`, which are
+ * identified by the delimiter options. This splits the text into "chunks" of
+ * either plain text or interpolations. This function transforms those chunks
+ * individually.
+ */
+function transformChunk(
+  text: string,
+  override?: string,
+  rightToLeft?: boolean,
+): string {
+  if (!text) return '';
+
+  const mapping = rightToLeft ? bidiCharactersMapping : charactersMapping;
+
+  let converted = '';
+  text = override ? override.repeat(text.length) : text;
+  for (const char of text) {
+    converted += char in mapping ? mapping[char as keyof typeof mapping] : char;
+  }
+  return rightToLeft ? `${RLO}${converted}${PDF}` : converted;
+}
 
 export default function str(str: string, customOptions?: Options): string {
   const {
@@ -84,29 +67,29 @@ export default function str(str: string, customOptions?: Options): string {
     extend,
     extendCharacter,
     override,
+    rightToLeft,
   } = { ...defaultOptions, ...customOptions };
   const regexTokens = getTokens(str, {
     startDelimiter,
     endDelimiter,
     delimiter,
+    rightToLeft,
   });
 
-  let tokenIdx = 0;
+  let lastIndex = 0;
   let result = '';
-  while (result.length < str.length) {
-    const token = regexTokens[tokenIdx];
-    const resultLength = result.length;
-    if (token && token.index === resultLength) {
-      result += token[0];
-      tokenIdx++;
-      continue;
-    }
 
-    const character = override || str[resultLength];
-    const convertedCharacter = charactersMapping[character as Letter];
-
-    result += convertedCharacter || character;
+  for (const token of regexTokens) {
+    result += transformChunk(
+      str.slice(lastIndex, token.index),
+      override,
+      rightToLeft,
+    );
+    result += token[0];
+    lastIndex = token.index + token[0].length;
   }
+
+  result += transformChunk(str.slice(lastIndex), override, rightToLeft);
 
   return prepend + pad(result, extend, extendCharacter) + append;
 }

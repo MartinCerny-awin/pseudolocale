@@ -153,6 +153,31 @@ pseudolocale('This is going to be pseudolocalized %token%.', { override: '_' });
 // [!!_____________________%token%_!!]
 ```
 
+### RightToLeft
+
+Enables right-to-left (RTL / bidirectional `en-XB`) pseudolocalization. Replaces characters with
+flipped Unicode equivalents and wraps text segments in Right-to-Left Override (`\u202E` / RLO) and
+Pop Directional Formatting (`\u202C` / PDF) marks, while isolating placeholder tokens and delimiters
+so they are not directionally reversed.
+
+Default is `false`.
+
+```js
+pseudolocale('my name is {name}', {
+  rightToLeft: true,
+  startDelimiter: '{',
+  endDelimiter: '}',
+});
+// [!!‮ɯʎ uɐɯǝ ıs ‬{name}!!]
+```
+
+CLI flag:
+
+```bash
+pseudolocale --rightToLeft --string 'my name is %token%'
+# [!!‮ɯʎ uɐɯǝ ıs ‬%token%!!]
+```
+
 ## Contribution
 
 ### Installation
