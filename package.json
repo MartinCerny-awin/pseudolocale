@@ -36,22 +36,22 @@
     "lint": "eslint src && prettier -c {src,.}/**/*.ts --write && npm run lint:types"
   },
   "dependencies": {
-    "commander": "^13.1.0"
+    "commander": "13.1.0"
   },
   "files": [
     "README.md",
     "dist/"
   ],
   "devDependencies": {
-    "@types/node": "^24.13.3",
-    "@vitest/coverage-v8": "^4.1.10",
-    "eslint": "^9.39.5",
-    "eslint-config-prettier": "^10.1.8",
-    "prettier": "^3.9.6",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.65.0",
-    "unbuild": "^3.6.1",
-    "vitest": "^4.1.10"
+    "@types/node": "24.13.3",
+    "@vitest/coverage-v8": "4.1.10",
+    "eslint": "9.39.5",
+    "eslint-config-prettier": "10.1.8",
+    "prettier": "3.9.6",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.65.0",
+    "unbuild": "3.6.1",
+    "vitest": "4.1.10"
   },
   "type": "module"
 }
