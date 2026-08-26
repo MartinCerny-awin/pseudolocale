@@ -28,7 +28,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "unbuild",
+    "build": "tsdown",
     "prepublishOnly": "npm run build",
     "test": "vitest run",
     "lint:types": "tsc",
@@ -49,9 +49,9 @@
     "eslint": "10.9.1",
     "eslint-config-prettier": "10.1.8",
     "prettier": "3.9.6",
+    "tsdown": "0.22.2",
     "typescript": "5.9.3",
     "typescript-eslint": "8.68.0",
-    "unbuild": "3.6.1",
     "vitest": "4.1.10"
   },
   "type": "module"
